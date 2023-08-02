@@ -1,11 +1,12 @@
 package com.todocodeacademy.automovil.igu;
 
+import com.todocodeacademy.automovil.logica.Controladora;
+
 
 public class AltaAutomovil extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AltaAutomovil
-     */
+    Controladora control = new Controladora();
+    
     public AltaAutomovil() {
         initComponents();
     }
@@ -85,6 +86,11 @@ public class AltaAutomovil extends javax.swing.JFrame {
 
         btnLimpiar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,7 +199,25 @@ public class AltaAutomovil extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
+        String modelo = txtModelo.getText();
+        String marca = txtMarca.getText();
+        String motor = txtMotor.getText();
+        String color = txtColor.getText();
+        String patente = txtPatente.getText();
+        int cantPuertas = Integer.parseInt(txtCantPuertas.getText());
+        
+        control.agregarAutomovil(modelo, marca, motor, color, patente, cantPuertas);
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtModelo.setText("");
+        txtMarca.setText("");
+        txtMotor.setText("");
+        txtColor.setText("");
+        txtPatente.setText("");
+        txtCantPuertas.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
