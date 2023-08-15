@@ -2,13 +2,16 @@ package com.todocodeacademy.automovil.igu;
 
 import com.todocodeacademy.automovil.logica.Automovil;
 import com.todocodeacademy.automovil.logica.Controladora;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 public class ModifAuto extends javax.swing.JFrame {
 
-    Controladora control = new Controladora();
+    Controladora control = null;
     Automovil auto = new Automovil();
     
     public ModifAuto(int idAuto) {
+        control = new Controladora();
         initComponents();
         
         cargarDatosAuto(idAuto);
@@ -196,7 +199,24 @@ public class ModifAuto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
+        
+        // todos los datos del auto
+        String modelo = txtModelo.getText();
+        String marca = txtMarca.getText();
+        String motor = txtMotor.getText();
+        String color = txtColor.getText();
+        String patente = txtPatente.getText();
+        int cantPuertas = Integer.parseInt(txtCantPuertas.getText());
+        
+        control.modificarAuto(auto, modelo, marca, motor, color, patente, cantPuertas);
+        
+        mostrarMensaje("Edicion realizada correctamente", "Info", "Edicion Exitosa");
+        
+        ConsultaAutomovil consul = new ConsultaAutomovil();
+        consul.setVisible(true);
+        consul.setLocationRelativeTo(null);
+        
+        this.dispose();
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -234,6 +254,26 @@ public class ModifAuto extends javax.swing.JFrame {
     private void cargarDatosAuto(int idAuto) {
         // busco el auto en la BD
         auto = control.traerAutos(idAuto);
-        
+        // seteo los valores 
+        txtModelo.setText(auto.getModelo());
+        txtMarca.setText(auto.getMarca());
+        txtColor.setText(auto.getColor());
+        txtMotor.setText(auto.getMotor());
+        txtPatente.setText(auto.getPatente());
+        txtCantPuertas.setText(String.valueOf(auto.getCantPuertas()));
     }
+    
+    public void mostrarMensaje (String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if (tipo.equals("Error")) {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
+    
 }
