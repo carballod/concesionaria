@@ -1,9 +1,17 @@
 package com.todocodeacademy.automovil.igu;
 
+import com.todocodeacademy.automovil.logica.Automovil;
+import com.todocodeacademy.automovil.logica.Controladora;
+
 public class ModifAuto extends javax.swing.JFrame {
 
+    Controladora control = new Controladora();
+    Automovil auto = new Automovil();
+    
     public ModifAuto(int idAuto) {
         initComponents();
+        
+        cargarDatosAuto(idAuto);
     }
 
     @SuppressWarnings("unchecked")
@@ -120,7 +128,7 @@ public class ModifAuto extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addGap(38, 38, 38)
-                                        .addComponent(txtCantPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtCantPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -222,4 +230,10 @@ public class ModifAuto extends javax.swing.JFrame {
     private javax.swing.JTextField txtMotor;
     private javax.swing.JTextField txtPatente;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarDatosAuto(int idAuto) {
+        // busco el auto en la BD
+        auto = control.traerAutos(idAuto);
+        
+    }
 }
