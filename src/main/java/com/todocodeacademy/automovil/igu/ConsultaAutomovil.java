@@ -1,5 +1,6 @@
 package com.todocodeacademy.automovil.igu;
 
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultaAutomovil extends javax.swing.JFrame {
 
@@ -23,18 +24,26 @@ public class ConsultaAutomovil extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaMascotas = new javax.swing.JTable();
+        tablaAutos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowIconified(java.awt.event.WindowEvent evt) {
+                formWindowIconified(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1.setText("Consulta de Automóviles");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tablaMascotas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -45,7 +54,7 @@ public class ConsultaAutomovil extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tablaMascotas);
+        jScrollPane1.setViewportView(tablaAutos);
 
         jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton1.setText("Modificar");
@@ -128,8 +137,18 @@ public class ConsultaAutomovil extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+    private void formWindowIconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowIconified
 
+    }//GEN-LAST:event_formWindowIconified
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        cargarTabla();
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -137,6 +156,27 @@ public class ConsultaAutomovil extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaMascotas;
+    private javax.swing.JTable tablaAutos;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTabla() {
+        
+        // hace que la tabla no sea editable
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+            
+        };
+        
+        // ponemos titulos a las columnas
+        String titulos [] = {"Id", "Modelo", "Marca", "Motor", "Color", "Patente", "Puertas"};
+        
+        modeloTabla.setColumnIdentifiers(titulos);
+        
+        tablaAutos.setModel(modeloTabla);
+
+    }
 }
