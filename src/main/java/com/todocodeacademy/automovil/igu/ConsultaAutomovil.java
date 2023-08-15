@@ -58,6 +58,11 @@ public class ConsultaAutomovil extends javax.swing.JFrame {
 
         btnModificar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -180,6 +185,30 @@ public class ConsultaAutomovil extends javax.swing.JFrame {
         cargarTabla();
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (tablaAutos.getRowCount() > 0) {
+            // valido que se haya seleccionado un registro
+            if (tablaAutos.getSelectedRow() != -1) {
+                // obtener id del auto que quiero borrar
+                int idAuto = Integer.parseInt(
+                        String.valueOf(tablaAutos.getValueAt(tablaAutos.getSelectedRow(), 0))
+                        );
+                
+                ModifAuto modif = new ModifAuto(idAuto);
+                modif.setVisible(true);
+                modif.setLocationRelativeTo(null);
+                
+                this.dispose();
+                
+            } else {
+                mostrarMensaje("No selecciono un registro para modificar", "Error", "Error al modificar");
+            }
+            
+        } else {
+            mostrarMensaje("La tabla esta vacia, no se puede modificar", "Error", "Error al modificar");
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     
     
